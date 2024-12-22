@@ -185,7 +185,7 @@ namespace Simple_Example_JSON_In_C__With_REST_API_Call
             public decimal bodyTemperature { get; set; }
             public DateTime DateExamination { get; set; }
             public int height { get; set; }
-            public int weight { get; set; }
+            public decimal weight { get; set; }
         }
 
 
@@ -218,11 +218,15 @@ namespace Simple_Example_JSON_In_C__With_REST_API_Call
 
         public class Meta
         {
+            private decimal _weight;
             public int height { get; set; }
-            public int weight { get; set; }
+            public decimal weight {
+                get { return _weight; }
+                set { _weight = Math.Round(Convert.ToDecimal((value) / (decimal)2.20462262185), 1); } 
+            }
             public decimal? bmi
             {
-                get { return Math.Round(Convert.ToDecimal((weight) / 2.20462262185 )/ ((Convert.ToDecimal(height) / 100 * Convert.ToDecimal(height) / 100)),2); }
+                get { return Math.Round((weight)/ ((Convert.ToDecimal(height) / 100 * Convert.ToDecimal(height) / 100)),2); }
                 set { bmi = value; }
             }
         }
